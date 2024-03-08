@@ -1,12 +1,15 @@
 import { LayoutProps } from "@/common/types/layout";
+import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
-import React from "react";
+import { Hero } from "@/components/Hero";
 
 export const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
+      <Hero />
       <div className="container mx-auto flex-1 py-10">{children}</div>
+      <Footer />
     </div>
   );
 };
