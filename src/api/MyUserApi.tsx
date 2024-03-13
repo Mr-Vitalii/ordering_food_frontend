@@ -1,4 +1,7 @@
-import { CreateUserRequest } from "@/common/types/user_api";
+import {
+  CreateUserRequest,
+  UpdateMyUserRequest,
+} from "@/common/types/user_api";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useMutation } from "react-query";
 
@@ -37,4 +40,37 @@ export const useCreateMyUser = () => {
     isError,
     isSuccess,
   };
+};
+
+export const useUpdateMyUser = () => {
+  const { getAccessTokenSilently } = useAuth0();
+
+  const updateMyUserRequest = async (formData: UpdateMyUserRequest) => {
+    const accessToken = await getAccessTokenSilently();
+
+    const response = await fetch(`${API_BASE_URL}/api/my/user`, {
+      method: "PUT",
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Failed to update user");
+    }
+
+    return response.json();
+  };
+
+  const {
+    mutateAsync: updateUser,
+    isLoading,
+    isSuccess,
+    error,
+    reset,
+  } = useMutation(updateMyUserRequest);
+
+  return { updateUser, isLoading };
 };
