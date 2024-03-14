@@ -1,3 +1,4 @@
+import { User } from "@/common/types/user";
 import {
   CreateUserRequest,
   UpdateMyUserRequest,
