@@ -1,6 +1,8 @@
 import { ControllerRenderProps, FieldValues } from "react-hook-form";
+import { Restaurant } from "./my-restaurant";
 
 export type ManageRestaurantFormProps = {
+  restaurant?: Restaurant;
   onSave: (restaurantFormData: FormData) => void;
   isLoading: boolean;
 };

@@ -1,13 +1,16 @@
+import { Loader } from "@/components/Loader";
 import { useAuth0 } from "@auth0/auth0-react";
 import { Navigate, Outlet } from "react-router-dom";
 
 const ProtectedRoute = () => {
   const { isAuthenticated, isLoading } = useAuth0();
 
-  console.log(isAuthenticated);
-
   if (isLoading) {
-    return null;
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <Loader />
+      </div>
+    );
   }
 
   if (isAuthenticated) {
