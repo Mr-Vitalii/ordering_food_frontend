@@ -1,4 +1,4 @@
-import landingImage from "../assets/landing.png";
+import landingImage from "../assets/landing.jpg";
 import appDownloadImage from "../assets/appDownload.png";
 
 export const HomePage = () => {
