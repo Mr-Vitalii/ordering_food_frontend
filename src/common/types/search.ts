@@ -16,3 +16,12 @@ export type RestaurantSearchResponse = {
     pages: number;
   };
 };
+
+export type SearchResultInfoProps = {
+  total: number;
+  city: string;
+};
+
+export type SearchResultCardProps = {
+  restaurant: Restaurant;
+};
