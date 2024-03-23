@@ -25,3 +25,7 @@ export type SearchResultInfoProps = {
 export type SearchResultCardProps = {
   restaurant: Restaurant;
 };
+
+export type SearchState = {
+  searchQuery: string;
+};
