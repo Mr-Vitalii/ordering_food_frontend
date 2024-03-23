@@ -29,4 +29,5 @@ export type SearchResultCardProps = {
 export type SearchState = {
   searchQuery: string;
   page: number;
+  selectedCuisines: string[];
 };
