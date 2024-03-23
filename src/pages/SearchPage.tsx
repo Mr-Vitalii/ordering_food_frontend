@@ -6,11 +6,13 @@ import { useParams } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import { SearchState } from "@/common/types/search";
 import { SearchBar, SearchForm } from "@/components/SearchBar";
+import { PaginationSelector } from "@/components/PaginationSelector";
 
 export const SearchPage = () => {
   const { city } = useParams();
   const [searchState, setSearchState] = useState<SearchState>({
     searchQuery: "",
+    page: 1,
   });
 
   const { results, isLoading } = useSearchRestaurants(searchState, city);
@@ -22,6 +24,13 @@ export const SearchPage = () => {
   if (!results?.data || !city) {
     return <span>No results found</span>;
   }
+
+  const setPage = (page: number) => {
+    setSearchState((prevState) => ({
+      ...prevState,
+      page,
+    }));
+  };
 
   const setSearchQuery = (searchFormData: SearchForm) => {
     setSearchState((prevState) => ({
@@ -59,6 +68,11 @@ export const SearchPage = () => {
             </li>
           ))}
         </ul>
+        <PaginationSelector
+          page={results.pagination.page}
+          pages={results.pagination.pages}
+          onPageChange={setPage}
+        />
       </div>
     </div>
   );
