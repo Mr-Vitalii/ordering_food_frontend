@@ -4,6 +4,7 @@ import { cuisineList } from "@/config/restaurant-options-config";
 import { Check, ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "./ui/button";
 import { Label } from "./ui/label";
+import { v4 as uuidv4 } from "uuid";
 
 export const CuisineFilter = ({
   onChange,
@@ -41,7 +42,7 @@ export const CuisineFilter = ({
           .map((cuisine) => {
             const isSelected = selectedCuisines.includes(cuisine);
             return (
-              <div className="flex">
+              <div key={uuidv4()} className="flex">
                 <input
                   id={`cuisine_${cuisine}`}
                   type="checkbox"

@@ -7,6 +7,7 @@ import {
   PaginationNext,
   PaginationPrevious,
 } from "./ui/pagination";
+import { v4 as uuidv4 } from "uuid";
 
 export const PaginationSelector = ({
   page,
@@ -30,7 +31,7 @@ export const PaginationSelector = ({
         )}
 
         {pageNumbers.map((number) => (
-          <PaginationItem>
+          <PaginationItem key={uuidv4()}>
             <PaginationLink
               href="#"
               onClick={() => onPageChange(number)}
