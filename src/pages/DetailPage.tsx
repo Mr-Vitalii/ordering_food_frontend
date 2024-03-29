@@ -4,10 +4,11 @@ import { useGetRestaurant } from "@/api/RestaurantApi";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { RestaurantInfo } from "@/components/RestaurantInfo";
 import { RestaurantMenuItem } from "@/components/RestaurantMenuItem";
-import { CartItem } from "@/common/types/card";
+import { CartItem } from "@/common/types/detail-page";
 import { Card, CardFooter } from "@/components/ui/card";
 import { OrderSummary } from "@/components/OrderSummary";
 import { MenuItem } from "@/common/types/my-restaurant";
+import { CheckoutButton } from "@/components/CheckoutButton";
 
 export const DetailPage = () => {
   const { restaurantId } = useParams();
@@ -44,6 +45,11 @@ export const DetailPage = () => {
         ];
       }
 
+      sessionStorage.setItem(
+        `cartItems-${restaurantId}`,
+        JSON.stringify(updatedCartItems)
+      );
+
       return updatedCartItems;
     });
   };
@@ -52,6 +58,11 @@ export const DetailPage = () => {
     setCartItems((prevCartItems) => {
       const updatedCartItems = prevCartItems.filter(
         (item) => cartItem._id !== item._id
+      );
+
+      sessionStorage.setItem(
+        `cartItems-${restaurantId}`,
+        JSON.stringify(updatedCartItems)
       );
 
       return updatedCartItems;
@@ -88,7 +99,9 @@ export const DetailPage = () => {
               cartItems={cartItems}
               removeFromCart={removeFromCart}
             />
-            <CardFooter>button</CardFooter>
+            <CardFooter>
+              <CheckoutButton />
+            </CardFooter>
           </Card>
         </div>
       </div>

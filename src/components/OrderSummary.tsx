@@ -1,4 +1,4 @@
-import { OrderSummaryProps } from "@/common/types/card";
+import { OrderSummaryProps } from "@/common/types/detail-page";
 import { Trash } from "lucide-react";
 import { Badge } from "./ui/badge";
 import { CardContent, CardHeader, CardTitle } from "./ui/card";

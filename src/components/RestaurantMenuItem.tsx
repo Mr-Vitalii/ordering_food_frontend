@@ -1,12 +1,10 @@
-import { MenuItem } from "../common/types/my-restaurant";
+import { RestaurantMenuItemProps } from "@/common/types/detail-page";
 import { Card, CardContent, CardHeader, CardTitle } from "./ui/card";
 
-type Props = {
-  menuItem: MenuItem;
-  addToCart: () => void;
-};
-
-export const RestaurantMenuItem = ({ menuItem, addToCart }: Props) => {
+export const RestaurantMenuItem = ({
+  menuItem,
+  addToCart,
+}: RestaurantMenuItemProps) => {
   return (
     <Card className="cursor-pointer" onClick={addToCart}>
       <CardHeader>
