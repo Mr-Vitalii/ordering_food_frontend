@@ -1,12 +1,62 @@
+import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { useGetRestaurant } from "@/api/RestaurantApi";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { RestaurantInfo } from "@/components/RestaurantInfo";
 import { RestaurantMenuItem } from "@/components/RestaurantMenuItem";
+import { CartItem } from "@/common/types/card";
+import { Card, CardFooter } from "@/components/ui/card";
+import { OrderSummary } from "@/components/OrderSummary";
+import { MenuItem } from "@/common/types/my-restaurant";
 
 export const DetailPage = () => {
   const { restaurantId } = useParams();
   const { restaurant, isLoading } = useGetRestaurant(restaurantId);
+
+  const [cartItems, setCartItems] = useState<CartItem[]>(() => {
+    const storedCartItems = sessionStorage.getItem(`cartItems-${restaurantId}`);
+    return storedCartItems ? JSON.parse(storedCartItems) : [];
+  });
+
+  const addToCart = (menuItem: MenuItem) => {
+    setCartItems((prevCartItems) => {
+      const existingCartItem = prevCartItems.find(
+        (cartItem) => cartItem._id === menuItem._id
+      );
+
+      let updatedCartItems;
+
+      if (existingCartItem) {
+        updatedCartItems = prevCartItems.map((cartItem) =>
+          cartItem._id === menuItem._id
+            ? { ...cartItem, quantity: cartItem.quantity + 1 }
+            : cartItem
+        );
+      } else {
+        updatedCartItems = [
+          ...prevCartItems,
+          {
+            _id: menuItem._id,
+            name: menuItem.name,
+            price: menuItem.price,
+            quantity: 1,
+          },
+        ];
+      }
+
+      return updatedCartItems;
+    });
+  };
+
+  const removeFromCart = (cartItem: CartItem) => {
+    setCartItems((prevCartItems) => {
+      const updatedCartItems = prevCartItems.filter(
+        (item) => cartItem._id !== item._id
+      );
+
+      return updatedCartItems;
+    });
+  };
 
   if (isLoading || !restaurant) {
     return <div>Loading...</div>;
@@ -24,8 +74,22 @@ export const DetailPage = () => {
           <RestaurantInfo restaurant={restaurant} />
           <span className="text-2xl font-bold tracking-tight">Menu</span>
           {restaurant.menuItems.map((menuItem) => (
-            <RestaurantMenuItem menuItem={menuItem} />
+            <RestaurantMenuItem
+              menuItem={menuItem}
+              addToCart={() => addToCart(menuItem)}
+            />
           ))}
+        </div>
+
+        <div>
+          <Card>
+            <OrderSummary
+              restaurant={restaurant}
+              cartItems={cartItems}
+              removeFromCart={removeFromCart}
+            />
+            <CardFooter>button</CardFooter>
+          </Card>
         </div>
       </div>
     </div>
