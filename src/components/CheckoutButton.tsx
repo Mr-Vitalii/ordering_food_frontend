@@ -10,6 +10,7 @@ import { Dialog, DialogContent, DialogTrigger } from "./ui/dialog";
 export const CheckoutButton = ({
   onCheckout,
   disabled,
+  isLoading,
 }: CheckoutButtonProps) => {
   const {
     isAuthenticated,
@@ -37,7 +38,7 @@ export const CheckoutButton = ({
     );
   }
 
-  if (isAuthLoading || !currentUser) {
+  if (isAuthLoading || !currentUser || isLoading) {
     return <LoadingButton />;
   }
 
