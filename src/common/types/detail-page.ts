@@ -22,5 +22,5 @@ export type RestaurantMenuItemProps = {
 export type CheckoutButtonProps = {
   onCheckout: (userFormData: UserFormData) => void;
   disabled: boolean;
-  // isLoading: boolean;
+  isLoading: boolean;
 };
