@@ -1,8 +1,8 @@
-import { OrderStatusHeaderProps } from "@/common/types/order";
+import { OrderTypeProps } from "@/common/types/order";
 import { ORDER_STATUS } from "@/config/order-status-config";
 import { Progress } from "./ui/progress";
 
-export const OrderStatusHeader = ({ order }: OrderStatusHeaderProps) => {
+export const OrderStatusHeader = ({ order }: OrderTypeProps) => {
   const getExpectedDelivery = () => {
     const created = new Date(order.createdAt);
 

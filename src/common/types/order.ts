@@ -44,10 +44,6 @@ export type Order = {
   restaurantId: string;
 };
 
-export type OrderStatusHeaderProps = {
-  order: Order;
-};
-
-export type OrderStatusDetailProps = {
+export type OrderTypeProps = {
   order: Order;
 };

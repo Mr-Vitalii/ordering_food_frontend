@@ -1,8 +1,8 @@
-import { OrderStatusDetailProps } from "@/common/types/order";
-import { Separator } from "./ui/separator";
 import { v4 as uuidv4 } from "uuid";
+import { OrderTypeProps } from "@/common/types/order";
+import { Separator } from "./ui/separator";
 
-export const OrderStatusDetail = ({ order }: OrderStatusDetailProps) => {
+export const OrderStatusDetail = ({ order }: OrderTypeProps) => {
   return (
     <div className="space-y-5">
       <div className="flex flex-col">
