@@ -5,6 +5,7 @@ import { AuthCallbackPage } from "./pages/AuthCallbackPage";
 import { DetailPage } from "./pages/DetailPage";
 import { HomePage } from "./pages/HomePage";
 import { ManageRestaurantPage } from "./pages/ManageRestaurantPage";
+import { OrderStatusPage } from "./pages/OrderStatusPage";
 import { SearchPage } from "./pages/SearchPage";
 import { UserProfilePage } from "./pages/UserProfilePage";
 
@@ -38,6 +39,14 @@ export const AppRoutes = () => {
       />
 
       <Route element={<ProtectedRoute />}>
+        <Route
+          path="/order-status"
+          element={
+            <Layout>
+              <OrderStatusPage />
+            </Layout>
+          }
+        />
         <Route
           path="/user-profile"
           element={

@@ -43,3 +43,11 @@ export type Order = {
   createdAt: string;
   restaurantId: string;
 };
+
+export type OrderStatusHeaderProps = {
+  order: Order;
+};
+
+export type OrderStatusDetailProps = {
+  order: Order;
+};
