@@ -47,3 +47,8 @@ export type Order = {
 export type OrderTypeProps = {
   order: Order;
 };
+
+export type UpdateOrderStatusRequest = {
+  orderId: string;
+  status: string;
+};
